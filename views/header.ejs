@@ -1,0 +1,47 @@
+<header class="header black-bg">
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title=""></div>
+    </div>
+    <!--logo start-->
+    <a href="/profile" class="logo"><b>VA<span>LEN</span></b></a>
+    <!--logo end-->
+    <div class="nav notify-row" id="top_menu">
+
+    </div>
+    <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+            <li><a class="logout" style="background-color: red;" href="/logout">Đăng xuất</a></li>
+        </ul>
+    </div>
+</header>
+<!--header end-->
+<!-- **********************************************************************************************************************************************************
+MAIN SIDEBAR MENU
+*********************************************************************************************************************************************************** -->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <p class="centered"><a><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+            <h5 class="centered"><p>Admin</p></h5>
+            <li class="mt">
+                <a href="/profile">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Thống Kê</span>
+                </a>
+            </li>
+
+            <li class="sub-menu">
+                <a <% if (page_name === 'building') { %>class="active" <% } %> href="javascript:;">
+                    <i class="fa fa-th"></i>
+                    <span>Danh Sánh Tòa Nhà</span>
+                </a>
+                <ul class="sub">
+                   
+                    <li <% if (page_name === 'building') { %>class="active" <% } %> ><a href="/building/building_service">Quản lý tòa nhà</a></li>
+    
+                </ul>
+            </li>
+    </div>
+</aside>

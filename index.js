@@ -5,9 +5,16 @@ const mongoose = require('mongoose');
 const express = require('express');
 const { json } = require('express');
 const app = express();
+const ejs = require('ejs');
+const path = require('path');
+const bodyParser = require('body-parser');
 
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 //Congfig private key
 const config = require('./config/default.json');
+
 
 //Path Routes
 const User_Role = require('./routes/user_role_service');
@@ -28,7 +35,18 @@ mongoose.connect('mongodb://localhost/Apartment-Management', { useNewUrlParser: 
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.log('Could not connect to MongoDB...', err));
 
-
+    // Views path
+const Building = require('./routes/building/building_services');
+// View Engine
+app.use('*/css',express.static('public/css'));
+app.use('*/lib',express.static('public/lib'));
+app.use('*/vendor',express.static('public/vendor'));
+app.use('*/img',express.static('public/img'));
+app.engine('ejs', require('ejs').__express);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+// Page
+app.use('/building/building_service', Building);
 //Sử dụng API
 app.use(express.json());
 app.use('/api/user_role', User_Role);
