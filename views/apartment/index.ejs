@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../head'); -%>
+</head>
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <%- include('../header'); -%>
+
+
+        <!--sidebar end-->
+        <!-- main content -->
+    </section>
+    <section id="main-content" class="">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i>Danh sách </h3>
+            <div class="row mt">
+               
+                <!-- page start-->
+                <div class="content-panel col-lg-12">
+                    <div class="table table-striped table-condensed container">
+
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="display table table-bordered" id="hidden-table-info">
+                            <thead>
+                                <tr>
+                                    <th class="hidden-phone">Tên căn hộ</th>
+                                    <th class="hidden-phone">Địa chỉ</th>
+                                    <th class="hidden-phone">Số phòng</th>
+                                    <th class="hidden-phone">Số phòng ngủ</th>
+                                    <th class="hidden-phone">Số nhà vệ sinh</th>
+                                    <th class="hidden-phone">Diện tích</th>
+                                    <th class="hidden-phone">Diện tích sử dụng</th>
+                                    <th class="hidden-phone">Thang máy</th>
+                                    <th class="hidden-phone">Hướng</th>
+                                    <th class="hidden-phone">Giá tiền</th>
+                                    <th class="hidden-phone">Giá thuê</th>
+                                    <th class="hidden-phone">Mô tả</th>
+                                    <th class="hidden-phone">Trạng thái</th>
+                                    <th class="hidden-phone">stype_code</th>
+                                    <th class="hidden-phone">Số điện thoại</th>
+                                    <th class="hidden-phone">Người bán</th>
+                                    <th class="hidden-phone">Ngày tạo</th>
+                                    <th class="hidden-phone"></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < apartment.length; i++) { %>
+                                    <tr>
+                                        <td><%= apartment[i].apt_name%></td>
+                                        <td><%= apartment[i].address%></td>
+                                        <td><%= apartment[i].rooms_count%></td>
+                                        <td><%= apartment[i].bedrooms_count%></td>
+                                        <td><%= apartment[i].bathrooms_count%></td>
+                                        <td><%= apartment[i].area%></td>
+                                        <td><%= apartment[i].area_builtin%></td>
+                                        <td><%= apartment[i].elavator%></td>
+                                        <td><%= apartment[i].direction%></td>
+                                        <td><%= apartment[i].price%></td>
+                                        <td><%= apartment[i].price_rent%></td>
+                                        <td><%= apartment[i].apt_desc%></td>
+                                        <td><%= apartment[i].apt_status%></td>
+                                        <td><%= apartment[i].stype_code%></td>
+                                        <td><%= apartment[i].apartment_building.phone_number%></td>
+                                        <td><%= apartment[i].apartment_building.ceo_building%></td>
+                                        <td><%= apartment[i].updated_at%></td>
+                                        <td><a href="/building/apartment_services/edit/<%= apartment[i]._id%>" class="btn btn-warning" role="button">Cập nhật</a>
+
+                                     
+                                    </tr>
+                                    <% } %>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- page end-->
+            </div>
+            <!-- /row -->
+        </section>
+        <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+
+    <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" language="javascript" src="lib/advanced-datatable/js/jquery.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="lib/jquery.scrollTo.min.js"></script>
+  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    <!--common script for all pages-->
+    <script src="lib/common-scripts.js"></script>
+    <!--script for this page-->
+    <script type="text/javascript">
+        /* Formating function for row details */
+        function fnFormatDetails(oTable, nTr) {
+            var aData = oTable.fnGetData(nTr);
+            var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+            sOut += '<tr><td>Tên căn hộ:</td><td>' + '&nbsp' + aData[1];
+            sOut += '<tr><td>Địa chỉ căn hộ:</td><td>' + '&nbsp' + aData[2];
+            sOut += '<tr><td>Số phòng:</td><td>' + '&nbsp' + aData[3];
+            sOut += '<tr><td>Số phòng ngủ:</td><td>' + '&nbsp' + aData[4];
+            sOut += '<tr><td>Số nhà vệ sinh:</td><td>' + '&nbsp' + aData[5];
+            sOut += '<tr><td>Vị trí:</td><td>' + '&nbsp' + aData[6];
+            sOut += '<tr><td>Vị trí tòa nhà:</td><td>' + '&nbsp' + aData[7];
+            sOut += '<tr><td>Thang máy:</td><td>' + '&nbsp' + aData[8];
+            sOut += '<tr><td>Hướng:</td><td>' + '&nbsp' + aData[9];
+                sOut += '<tr><td>Giá tiền:</td><td>' + '&nbsp' + aData[10];
+                    sOut += '<tr><td>Giá thuê:</td><td>' + '&nbsp' + aData[11];
+                        sOut += '<tr><td>Mô tả:</td><td>' + '&nbsp' + aData[12];
+                            sOut += '<tr><td>Trạng thái:</td><td>' + '&nbsp' + aData[13];
+                                sOut += '<tr><td>Stype_code:</td><td>' + '&nbsp' + aData[14];
+                                    sOut += '<tr><td>Số điện thoại:</td><td>' + '&nbsp' + aData[15];
+                                        sOut += '<tr><td>Người bán:</td><td>' + '&nbsp' + aData[16];
+            sOut += '</table>';
+
+            return sOut;
+        }
+
+        $(document).ready(function() {
+            /*
+             * Insert a 'details' column to the table
+             */
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<img src="lib/advanced-datatable/images/details_open.png">';
+            nCloneTd.className = "center";
+
+            $('#hidden-table-info thead tr').each(function() {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
+            });
+
+            $('#hidden-table-info tbody tr').each(function() {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
+
+            /*
+             * Initialse DataTables, with no sorting on the 'details' column
+             */
+            var oTable = $('#hidden-table-info').dataTable({
+                "aoColumnDefs": [{
+                    "bSortable": false,
+                    "aTargets": [0]
+                }],
+                "aaSorting": [
+                    [1, 'asc']
+                ]
+            });
+
+            /* Add event listener for opening and closing details
+             * Note that the indicator for showing which row is open is not controlled by DataTables,
+             * rather it is done here
+             */
+            $('#hidden-table-info tbody td img').live('click', function() {
+                var nTr = $(this).parents('tr')[0];
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+                    this.src = "lib/advanced-datatable/media/images/details_open.png";
+                    oTable.fnClose(nTr);
+                } else {
+                    /* Open this row */
+                    this.src = "lib/advanced-datatable/images/details_close.png";
+                    oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+                }
+            });
+        });
+    </script>
+  
+    
+
+</body>
+
+</html> 

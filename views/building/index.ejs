@@ -30,12 +30,13 @@
                                 <tr>
                                     <th class="hidden-phone">Tên công ty viết tắt</th>
                                     <th class="hidden-phone">Tên công ty</th>
-                                    <th class="hidden-phone">Số thứ tự</th>
+                                    <th class="hidden-phone">Mô tả công ty</th>
                                     <th class="hidden-phone">Địa chỉ</th>
                                     <th class="hidden-phone">Số điện thoại</th>
                                     <th class="hidden-phone">Email</th>
                                     <th class="hidden-phone">Tên người bán</th>
-                                    <th class="hidden-phone">Link ảnh</th>
+                                   
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -49,8 +50,9 @@
                                     <td><%= building[i].phone_number%></td>
                                     <td><%= building[i].email%></td>
                                     <td><%= building[i].ceo_building%></td>
-                                    <td><%= building[i].logo_img%></td>
+                                 
                                     <td><a href="/building/building_service/edit/<%= building[i]._id%>" class="btn btn-warning" role="button">Cập nhật</a>
+                                      <td><a href="/building/apartment_service/create/<%= building[i]._id%>" class="btn btn-theme03" role="button">Tạo BĐS</a>
                                   </td>
                                 </tr>
                                 <% } %>
@@ -94,11 +96,11 @@
             var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
             sOut += '<tr><td>Tên công ty viết tắt:</td><td>' + '&nbsp' + aData[1];
             sOut += '<tr><td>Tên công ty:</td><td>' + '&nbsp' + aData[2];
-            sOut += '<tr><td>Số thứ tự:</td><td>' + '&nbsp' + aData[3];
+            sOut += '<tr><td>Mô tả công ty:</td><td>' + '&nbsp' + aData[3];
             sOut += '<tr><td>Số điện thoại:</td><td>' + '&nbsp' + aData[4];
             sOut += '<tr><td>Email:</td><td>' + '&nbsp' + aData[5];
             sOut += '<tr><td>Tên người bán:</td><td>' + '&nbsp' + aData[6];
-                sOut += '<tr><td>Link ảnh:</td><td>' + '&nbsp' + aData[7];
+             
             sOut += '</table>';
 
             return sOut;
@@ -130,7 +132,7 @@
                     "aTargets": [0]
                 }],
                 "aaSorting": [
-                    [1, 'asc']
+                    [1, 'desc']
                 ]
             });
 
@@ -172,10 +174,17 @@
               <label>Tên công ty:</label>
               <input class="form-control" name="full_name" required maxlength="50">
             </div>
-            <div class="form-group">
-              <label>Số thứ tự:</label>
+            <!-- <div class="form-group">
+              <label>Mô tả công ty:</label>
               <input class="form-control" name="desc" required maxlength="50">
-            </div>
+            </div> -->
+            <div class=" form-group">
+              <label for="Content">Mô tả công ty:</label>
+              <textarea name="desc" id="editor1">This is some sample content.</textarea>
+              <script>
+                  CKEDITOR.replace('editor1');
+              </script>
+          </div>
             <div class="form-group">
               <label>Địa chỉ:</label>
               <input class="form-control" name="address" required maxlength="50">
@@ -192,10 +201,7 @@
                 <label>Tên người bán:</label>
                 <input class="form-control" name="ceo_building" required maxlength="50">
               </div>
-              <div class="form-group">
-                <label>Link ảnh:</label>
-                <input class="form-control" name="logo_img" required maxlength="50">
-              </div>
+           
 
             <button type="submit" class="btn btn-primary">Create</button>
           </form>

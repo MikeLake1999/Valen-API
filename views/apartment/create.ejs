@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../head'); -%>
+</head>
+<style>
+  input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background: white;
+  color: black;
+}
+</style>
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <%- include('../header'); -%>
+
+
+        <!--sidebar end-->
+        <!-- main content -->
+    </section>
+    <section id="main-content" class="">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i>Thêm mới căn hộ </h3>
+            <div class="row mt">
+               
+                <!-- page start-->
+                <div class="content-panel col-lg-12">
+                  <form method="POST" action="/building/apartment_service/save" enctype="multipart/form-data">
+                    <div class="form-group hidden" style="width: 15%!important;">
+                      <label>ID:</label>
+                    <input class="hidden" value="<%= _id %>" name="id" required maxlength="50">
+                  </div>
+                    <div class="form-group">
+                      <label>Tên căn hộ:</label>
+                      <input type="text" name="apt_name" class="form-control" required maxlength="50">
+                    </div>
+                    <div class="form-group">
+                      <label>Địa chỉ:</label>
+                      <input type="text" class="form-control" name="address" required maxlength="50">
+                    </div>
+                    <div class="form-inline">
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Tổng số phòng:</label>
+                        <input type="text" class="form-control" name="rooms_count" required maxlength="50">
+                      </div>
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Số phòng ngủ:</label>
+                        <input type="text" class="form-control" name="bedrooms_count" required maxlength="50">
+                      </div>
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Số nhà vệ sinh:</label>
+                        <input type="text" class="form-control" name="bathrooms_count" required maxlength="50">
+                      </div>
+                    </div>
+                    <div class="form-inline">
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Diện tích:</label>
+                        <input type="text" class="form-control" name="area" required maxlength="50">
+                      </div>
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Diện tích sử dụng:</label>
+                        <input type="text" class="form-control" name="area_builtin" required maxlength="50">
+                      </div>
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Thang máy:</label>
+                        <input type="text" class="form-control" name="elavator" required maxlength="50">
+                      </div>
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Hướng:</label>
+                        <input type="text" class="form-control" name="direction" required maxlength="50">
+                      </div>
+                      <div class="form-inline">
+                        <div class="form-group" style="width: 15%!important;">
+                          <label>Giá tiền(VNĐ):</label>
+                          <input type="text" class="form-control" name="price" required maxlength="50">
+                        </div>
+                        <div class="form-group" style="width: 15%!important;">
+                          <label>Giá thuê(VNĐ):</label>
+                          <input type="text" class="form-control" name="price_rent" required maxlength="50">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-inline">
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Trạng Thái:</label>
+                        <input type="text" class="form-control" name="apt_status" required maxlength="50">
+                      </div>
+                      <div class="form-group" style="width: 15%!important;">
+                        <label>Loại hình:</label>
+                        <input type="text" class="form-control" name="stype_code" required maxlength="50">
+                      </div>
+                     
+                      <div class="form-group">
+                        <label>Hình ảnh:</label>
+                        <input  type="file" name="multi-files" multiple id="files" class="form-control-file border"/>
+                          <hr />
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="preview-images"></div>
+                            </div>
+                          </div>
+                      </div>
+        
+                    </div>
+                    <div class=" form-group">
+                      <label for="Content">Mô tả căn hộ:</label>
+                      <textarea name="apt_desc" id="editor1">This is some sample content.</textarea>
+                      <script>
+                        CKEDITOR.replace('editor1');
+                      </script>
+                    </div>
+        
+        
+                    <button type="submit" class="btn btn-primary">Create</button>
+                  </form>
+
+                </div>
+
+                <!-- page end-->
+            </div>
+            <!-- /row -->
+        </section>
+        <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+
+    <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--script for this page-->
+    <script>
+        $(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image</span>" +
+            "</span>").insertAfter("#files");
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
+      </script>
+  
+    
+
+</body>
+
+</html> 

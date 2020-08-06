@@ -10,8 +10,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 //Congfig private key
 const config = require('./config/default.json');
 
@@ -37,16 +35,22 @@ mongoose.connect('mongodb://localhost/Apartment-Management', { useNewUrlParser: 
 
     // Views path
 const Building = require('./routes/building/building_services');
+const Apartment_service = require('./routes/building/apartment_services');
 // View Engine
+app.engine('ejs', require('ejs').__express);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 app.use('*/css',express.static('public/css'));
 app.use('*/lib',express.static('public/lib'));
 app.use('*/vendor',express.static('public/vendor'));
 app.use('*/img',express.static('public/img'));
-app.engine('ejs', require('ejs').__express);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use('*/upload',express.static('upload'));
 // Page
 app.use('/building/building_service', Building);
+app.use('/building/apartment_service', Apartment_service);
 //Sử dụng API
 app.use(express.json());
 app.use('/api/user_role', User_Role);

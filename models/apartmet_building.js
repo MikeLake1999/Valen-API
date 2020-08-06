@@ -9,7 +9,8 @@ const apartmentBuildingSchema = new mongoose.Schema({
     phone_number: String,
     email: String,
     ceo_building: String,
-    logo_img: String
+    logo_img: String,
+    updated_at: { type: Date, default: Date.now }
 });
 
 const Apartment_Building = mongoose.model('Apartment_Building', apartmentBuildingSchema);

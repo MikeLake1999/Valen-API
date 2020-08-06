@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { ApartmentBuildingSchema } = require('./apartmet_building');
 
 
+
 const apartmentSchema = new mongoose.Schema({
     apt_name: String,
     address: String,
@@ -11,18 +12,20 @@ const apartmentSchema = new mongoose.Schema({
     bathrooms_count: Number,
     area: Number,
     area_builtin: Number,
-    elavator: Boolean,
+    elavator: Number,
     direction: String,
     price: Number,
     price_rent: Number,
     apt_desc: String,
     apt_status: Number,
     stype_code: Number,
+    updated_at: { type: Date, default: Date.now },
     apartment_building: {
         type: ApartmentBuildingSchema,
         required: true
     },
     apartment_img: Array
+    
 });
 
 const apartment = mongoose.model('Apartments', apartmentSchema);

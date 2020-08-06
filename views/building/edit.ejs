@@ -32,10 +32,13 @@
                     <label>Tên công ty:</label>
                     <input class="form-control" name="full_name" value="<%= building.full_name %>" required maxlength="50">
                   </div>
-                  <div class="form-group">
-                    <label>Số thứ tự:</label>
-                    <input class="form-control" name="desc" value="<%= building.desc %>" required maxlength="50">
-                  </div>
+                  <div class=" form-group">
+                    <label for="Content">Mô tả công ty:</label>
+                    <textarea name="desc" id="editor1"  ><%= building.desc %></textarea>
+                    <script>
+                        CKEDITOR.replace('editor1');
+                    </script>
+                </div>
                   <div class="form-group">
                     <label>Địa chỉ:</label>
                     <input class="form-control" name="address" value="<%= building.address %>" required maxlength="50">
@@ -52,10 +55,7 @@
                       <label>Tên người bán:</label>
                       <input class="form-control" name="ceo_building" value="<%= building.ceo_building %>" required maxlength="50">
                     </div>
-                    <div class="form-group">
-                      <label>Link ảnh:</label>
-                      <input class="form-control" name="logo_img" value="<%= building.logo_img %>" required maxlength="50">
-                    </div>
+                 
       
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
               </form>
