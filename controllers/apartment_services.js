@@ -97,7 +97,8 @@ apartmentController.edit = async(req, res) => {
 
   // Update 
 apartmentController.update = async(req, res) => {
-  
+  const apartmetBuilding = await Apartment_Building.findById(req.body.id);
+  if (!apartmetBuilding) return res.status(400).send('Invalid apartmet building.');
     Apartment.findByIdAndUpdate(req.params.id, { $set: {
         apt_name: req.body.apt_name,
         address: req.body.address,
@@ -124,14 +125,14 @@ apartmentController.update = async(req, res) => {
             ceo_building: apartmetBuilding.ceo_building,
             logo_img: apartmetBuilding.logo_img
         },
-        apartment_img: req.body.apartment_img
+        apartment_img: req.files
 }}, { new: true }, function (err, apartment) {
       if (err) {
         console.log(err);
         res.render("../views/apartment/edit", {apartment: req.body, page_name: 'apartment'});
       }
       console.log("Successfully to edit!");
-      res.redirect("/apartment/apartment_service");
+      res.redirect("/building/apartment_service");
     });
   };
 module.exports = apartmentController;

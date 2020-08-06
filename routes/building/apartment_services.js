@@ -45,7 +45,7 @@ router.get('/edit/:id', function(req, res) {
 });
 // Edit update
 
-router.post('/update/:id', function(req, res) {
+router.post('/update/:id', uploadFiles.array("multi-files"), function(req, res) {
   apartment.update(req, res);
 });
 
