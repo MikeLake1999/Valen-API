@@ -4,6 +4,33 @@
 <head>
     <%- include('../head'); -%>
 </head>
+<style>
+  input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background: white;
+  color: black;
+}
+</style>
 <body>
     <section id="container">
         <!-- **********************************************************************************************************************************************************
@@ -85,16 +112,17 @@
                     <label>Loại hình:</label>
                     <input class="form-control" name="stype_code" value="<%= apartment.stype_code %>">
                   </div>
-                  <!-- <div class="form-group" >
+                  
+                  <div class="form-group">
                     <label>Hình ảnh:</label>
-                    <input  type="file" name="multi-files" value="<%= apartment.apartment_img %>" multiple id="files" class="form-control-file border"/>
+                    <input  type="file" name="multi-files" multiple id="files" class="form-control-file border"/>
                       <hr />
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="preview-images"></div>
                         </div>
                       </div>
-                  </div> -->
+                  </div>
                   </div>
                   <div class=" form-group">
                     <label for="Content">Mô tả căn hộ:</label>
