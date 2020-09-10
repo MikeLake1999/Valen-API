@@ -9,7 +9,7 @@
   display: block;
 }
 .imageThumb {
-  max-height: 75px;
+  max-height: 150px;
   border: 2px solid;
   padding: 1px;
   cursor: pointer;
@@ -50,86 +50,152 @@
     
             <!-- page start-->
             <div class="col-lg-12">
-              <form method="post" action="/building/apartment_service/update/<%= apartment._id%>">
-                <input class="" value="<%= apartment. apartment_building.id %>" name="id" required maxlength="50">
+              <form method="post" action="/admin/apartment_service/update/<%= apartment._id%>">
+                <input class="hidden" value="<%= apartment. apartment_building.id %>" name="id" required maxlength="50">
                 <div class="form-group">
-                    <label>Tên căn hộ:</label>
-                    <input type="text" name="apt_name" class="form-control" value="<%= apartment.apt_name %>">
-                  </div>
-                  <div class="form-group">
-                    <label>Địa chỉ:</label>
-                    <input class="form-control" name="address" value="<%= apartment.address %>">
-                  </div>
-                  <div class="form-inline">
-                  <div class="form-group" style="width: 15%!important;">
-                    <label>Tổng số phòng:</label>
-                    <input class="form-control" name="rooms_count" value="<%= apartment.rooms_count %>">
-                  </div>
+                  <label>Tên căn hộ:</label>
+                  <input type="text" name="apt_name" class="form-control" value="<%= apartment.apt_name %>">
+                </div>
+                <div class="form-group" >
+                  <label>Địa chỉ:</label>
+                  <input type="text" class="form-control" name="address" value="<%= apartment.address %>">
+                </div>
+                <div class="form-inline">
+                <div class="form-group" style="width: 25%!important;">
+                  <label >Loại hình:</label>
+                  <select id="status" name="stype_code" class="form-control" value="<%= apartment.stype_code %>" selected>
+                   
+                    <option value="0" <% if( apartment.stype_code === '0'){%> selected <% } %>>Shop-house</option>
+                    <option value="1" <% if( apartment.stype_code === '1'){%> selected <% } %>>Nhà đất</option>
+                    <option value="2" <% if( apartment.stype_code === '2'){%> selected <% } %>>Chung cư</option>
                   
+                  </select>
+                </div>
+                <div class="form-group" style="width: 25%!important;">
+                 
+                  <input type="checkbox"  name="stype" value="0" <% if( apartment.stype == '0'){%> checked <% } %>>
+                  <label>Nhà Bán</label><br>
+                  <input type="checkbox"  name="stype" value="1" <% if( apartment.stype == '1'){%> checked <% } %>>
+                  <label>Nhà cho thuê</label><br>
+                </div>
+                <div class="form-group" style="width: 25%!important;">
+                  <label>Hướng:</label>
+                  <select id="status" name="direction" class="form-control" value="<%= apartment.direction %>" selected>
+                    <option value="" selected disabled hidden>Lựa chọn</option>
+                    <option value="Đông" <% if( apartment.direction === 'Đông'){%> selected <% } %>>Đông</option>
+                    <option value="Tây" <% if( apartment.direction === 'Tây'){%> selected <% } %>>Tây</option>
+                    <option value="Nam" <% if( apartment.direction === 'Nam'){%> selected <% } %>>Nam</option>
+                    <option value="Bắc" <% if( apartment.direction === 'Bắc'){%> selected <% } %>>Bắc</option>
+                    <option value="Tây-Bắc" <% if( apartment.direction === 'Tây-Bắc'){%> selected <% } %>>Tây-Bắc</option>
+                    <option value="Đông-Bắc" <% if( apartment.direction === 'Đông-Bắc'){%> selected <% } %>>Đông-Bắc</option>
+                    <option value="Đông-Nam" <% if( apartment.direction === 'Đông-Nam'){%> selected <% } %>>Đông-Nam</option>
+                    <option value="Tây-Nam" <% if( apartment.direction === 'Tây-Nam'){%> selected <% } %>>Tây-Nam</option>
+                  </select>
+                </div>
+              </div>
+                <div class="form-inline" style="margin-top: 20px;">
+                  <div class="form-group" style="width: 15%!important;">
+                    <label>Phòng khách:</label>
+                    <input type="number" class="form-control" name="rooms_count" value="<%= apartment.rooms_count %>">
+                  </div>
                   <div class="form-group" style="width: 15%!important;">
                     <label>Số phòng ngủ:</label>
-                    <input class="form-control" name="bedrooms_count" value="<%= apartment.bedrooms_count %>">
+                    <input type="number" class="form-control" name="bedrooms_count" value="<%= apartment.bedrooms_count %>" >
                   </div>
                   <div class="form-group" style="width: 15%!important;">
                     <label>Số nhà vệ sinh:</label>
-                    <input class="form-control" name="bathrooms_count" value="<%= apartment.bathrooms_count %>">
+                    <input type="number" class="form-control" name="bathrooms_count" value="<%= apartment.bathrooms_count %>" >
                   </div>
-                  </div>
-                  <div class="form-inline">
                   <div class="form-group" style="width: 15%!important;">
                     <label>Diện tích:</label>
-                    <input class="form-control" name="area" value="<%= apartment.area %>">
+                    <input type="number" class="form-control" name="area" value="<%= apartment.area %>" >
                   </div>
-                  <div class="form-group" style="width: 15%!important;">
-                    <label>Diện tích sử dụng:</label>
-                    <input class="form-control" name="area_builtin" value="<%= apartment.area_builtin %>">
-                  </div>
-                  <div class="form-group" style="width: 15%!important;">
+                 
+                </div>
+                <div class="form-group">
+                  <label>Tình hình nội thất:</label>
+                  <input type="text" class="form-control" name="furniture" value="<%= apartment.furniture %>">
+                </div>
+                <div class="form-inline">
+                 
+                  <!-- <div class="form-group" style="width: 15%!important;"> -->
+                    <!-- <label>Diện tích sử dụng:</label> -->
+                    <!-- <input type="text" class="form-control" name="area_builtin" placeholder="Diện tích sử dụng......">
+                  </div> -->
+                  <!-- <div class="form-group" style="width: 15%!important;">
                     <label>Thang máy:</label>
-                    <input class="form-control" name="elavator" value="<%= apartment.elavator %>">
+                    <select id="status" name="elavator" class="form-control" >
+                      <option value="" selected disabled hidden>Lựa chọn</option>
+                      <option value="0">Không có</option>
+                      <option value="1">Có</option>
+                    </select>
+                  </div> -->
+
+                  <div class="form-inline" id="form" style="margin-top: 20px;">
+                    <div class="form-group"  style="width: 15%!important;">
+                      <label>Giá tiền(VNĐ):</label>
+                      <input id="amount"  type="text" class="form-control" name="price" value="<%= apartment.price %>">
+                    </div>
+                   
+                    <div class="form-group" style="width: 15%!important;">
+                      <label>Giá thuê(VNĐ):</label>
+                      <input type="text"  id="amount" class="form-control" name="price_rent" value="<%= apartment.price_rent %>">
+                    </div>
                   </div>
+                </div>
+                <div class="form-inline" style="margin-top: 20px;">
                   <div class="form-group" style="width: 15%!important;" >
-                    <label>Hướng:</label>
-                    <input class="form-control" name="direction" value="<%= apartment.direction %>">
-                  </div>
-                  </div>
-                  <div class="form-inline">
-                  <div class="form-group" style="width: 15%!important;">
-                    <label>Giá tiền:</label>
-                    <input class="form-control" name="price" value="<%= apartment.price %>">
-                  </div>
-                  <div class="form-group" style="width: 15%!important;">
-                    <label>Giá thuê:</label>
-                    <input class="form-control" name="price_rent" value="<%= apartment.price_rent %>">
-                  </div>
-                  </div>
-                  <div class="form-inline">
-                  <div class="form-group" style="width: 15%!important;">
                     <label>Trạng Thái:</label>
-                    <input class="form-control" name="apt_status" value="<%= apartment.apt_status %>">
+                    
+                    <select id="status" name="apt_status" class="form-control" value="<%= apartment.apt_status %>" selected>
+                      
+                      <option value="0" <% if( apartment.apt_status == '0'){%> selected <% } %>>Đóng</option>
+                      <option value="1" <% if( apartment.apt_status == '1'){%> selected <% } %>>Đang giao bán</option>
+                      <option value="2" <% if( apartment.apt_status == '2'){%> selected <% } %>>Đã bán</option>
+                      <option value="3" <% if( apartment.apt_status == '3'){%> selected <% } %>>Đã đặt cọc</option>
+                      <option value="99" <% if( apartment.apt_status == '99'){%> selected <% } %>>Thiếu giấy tờ</option> 
+                    </select>
                   </div>
-                  <div class="form-group" style="width: 15%!important;">
-                    <label>Loại hình:</label>
-                    <input class="form-control" name="stype_code" value="<%= apartment.stype_code %>">
+                     <div class="form-group" style="width: 50%!important;">
+                    <label>Loại chủ quyền:</label>
+                    <select id="status" name="area_builtin" class="form-control" value="<%= apartment.area_builtin %>" selected>
+                      
+                      <option value="" <% if( apartment.area_builtin === 'Sổ hồng'){%> selected <% } %>>Sổ hồng</option>
+                      <option value="Giấy chứng nhận quyền sử dụng đất" <% if( apartment.area_builtin === 'Giấy chứng nhận quyền sử dụng đất'){%> selected <% } %>>Giấy chứng nhận quyền sử dụng đất</option>
+                      <option value="Giấy chứng nhận quyền sở hữu nhà ở và quyền sử dụng đất ở" <% if( apartment.area_builtin === 'Giấy chứng nhận quyền sở hữu nhà ở và quyền sử dụng đất ở'){%> selected <% } %>>Giấy chứng nhận quyền sở hữu nhà ở và quyền sử dụng đất ở</option>
+                      <option value="Giấy chứng nhận quyền sử dụng đất quyền sở hữu nhà ở và tài sản khác gắn liền với đất" <% if( apartment.area_builtin === 'Giấy chứng nhận quyền sử dụng đất quyền sở hữu nhà ở và tài sản khác gắn liền với đất'){%> selected <% } %>>Giấy chứng nhận quyền sử dụng đất quyền sở hữu nhà ở và tài sản khác gắn liền với đất</option>
+                      <option value="Sổ đỏ chính chủ" <% if( apartment.area_builtin === 'Sổ đỏ chính chủ'){%> selected <% } %>>Sổ đỏ chính chủ</option> 
+                    </select>
                   </div>
-                  
-                  <div class="form-group">
-                    <label>Hình ảnh:</label>
-                    <input  type="file" name="multi-files" multiple id="files" class="form-control-file border"/>
-                      <hr />
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="preview-images"></div>
-                        </div>
+                </div>
+               
+                <div class="form-group"  style="margin-top: 20px;">
+                  <label>Hình ảnh:</label>
+                  <%for(var i=0; i<apartment.apartment_img.length; i++){%>
+                   
+                    <span class="pip">
+                      <img class="imageThumb" src="http://104.198.23.106/<%=apartment.apartment_img[i]%>">
+                      <br/> <span class="remove">Remove image</span>
+                      </span>
+                    <%}%>
+                </div>
+                 
+                <!-- <div class="form-group"  style="margin-top: 20px;">
+                  <label>Hình ảnh:</label>
+                  <input  type="file" name="multi-files" multiple id="files" class="form-control-file border"/>
+                    <hr />
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="preview-images"></div>
                       </div>
-                  </div>
-                  </div>
-                  <div class=" form-group">
-                    <label for="Content">Mô tả căn hộ:</label>
-                    <textarea name="apt_desc" id="editor1"  ><%= apartment.apt_desc  %></textarea>
-                    <script>
-                        CKEDITOR.replace('editor1');
-                    </script>
+                    </div>
+                </div> -->
+                <div class=" form-group">
+                  <label for="Content">Mô tả căn hộ:</label>
+                  <textarea name="apt_desc" id="editor1"><%= apartment.apt_desc %></textarea>
+                  <script>
+                    CKEDITOR.replace('editor1');
+                  </script>
                 </div>
                  
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
@@ -180,6 +246,65 @@
   } else {
     alert("Your browser doesn't support to File API")
   }
+  (function($, undefined) {
+
+"use strict";
+
+// When ready.
+$(function() {
+  
+  var $form = $( "#form" );
+  var $input = $form.find( "input" );
+
+  $input.on( "keyup", function( event ) {
+    
+    
+    // When user select text in the document, also abort.
+    var selection = window.getSelection().toString();
+    if ( selection !== '' ) {
+      return;
+    }
+    
+    // When the arrow keys are pressed, abort.
+    if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+      return;
+    }
+    
+    
+    var $this = $( this );
+    
+    // Get the value.
+    var input = $this.val();
+    
+    var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt( input, 10 ) : 0;
+
+        $this.val( function() {
+          return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+        } );
+  } );
+  
+  /**
+   * ==================================
+   * When Form Submitted
+   * ==================================
+   */
+  $form.on( "submit", function( event ) {
+    
+    var $this = $( this );
+    var arr = $this.serializeArray();
+  
+    for (var i = 0; i < arr.length; i++) {
+        arr[i].value = arr[i].value.replace(/[($)\s\._\-]+/g, ''); // Sanitize the values.
+    };
+    
+    console.log( arr );
+    
+    event.preventDefault();
+  });
+  
+});
+})(jQuery);
 });
       </script>
 

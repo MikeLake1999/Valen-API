@@ -2,24 +2,17 @@ var express = require('express');
 var router = express.Router();
 var apartment = require('../../controllers/apartment_services.js');
 const multer = require('multer');
-const path = require("path");
+
 
 var storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, path.join(`${__dirname}/../../upload`));
+  destination: function (req, file, cb) {
+      cb(null, 'upload/')
   },
-  filename: (req, file, callback) => {
-    const match = ["image/png", "image/jpeg"];
-
-    if (match.indexOf(file.mimetype) === -1) {
-      var message = `<strong>${file.originalname}</strong> is invalid. Only accept png/jpeg.`;
-      return callback(message, null);
-    }
-
-    var filename = `${Date.now()}${file.originalname}`;
-    callback(null, filename);
+  filename: function (req, file, cb) {
+      cb(null, new Date().toDateString() + file.originalname)
   }
-});
+})
+var upload = multer({ storage: storage })
 
 var uploadFiles = multer({ storage: storage });
 // Get all
@@ -35,7 +28,7 @@ router.get('/create/:id', function(req, res) {
   apartment.create(req, res);
 });
 // Save
-router.post('/save', uploadFiles.array("multi-files") ,  function(req, res) {
+router.post('/save', upload.array("multi-files", 20) ,  function(req, res) {
   
   apartment.save(req, res);
 });

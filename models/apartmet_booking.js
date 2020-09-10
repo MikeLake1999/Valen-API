@@ -12,8 +12,12 @@ const ApartmentBooking = mongoose.model('Apartment_Booking', new mongoose.Schema
         type: UserSchema,
         required: true
     },
+    salesman: String,
     desc: String,
-    updated_at: { type: Date, default: Date.now }
+    create_at: {
+        type: Date,
+        default: Date.now
+    },
 }));
 
-exports.ApartmentBooking = ApartmentBooking;
+exports.Apartmet_Booking = ApartmentBooking;

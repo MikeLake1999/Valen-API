@@ -1,7 +1,9 @@
 const { User_Role, validate } = require('../models/user_role');
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
+const admin_auth = require('../middleware/admin');
+
 
 /*
    Lấy ra toàn bộ quyền đang hiện có.
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
 /*
    Thêm mới 1 quyền.
 */
-router.post('/', async (req, res) => {
+router.post('/',  async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     // User Role
@@ -29,7 +31,7 @@ router.post('/', async (req, res) => {
 /*
    Chỉnh sửa thông tin quyền.
 */
-router.put('/:id', async (req, res) => {
+router.put('/:id', [auth, admin_auth], async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     // User Role
@@ -45,7 +47,7 @@ router.put('/:id', async (req, res) => {
 /*
    Xóa đi thông tin quyền.
 */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, admin_auth], async (req, res) => {
     const user_role = await User_Role.findByIdAndRemove(req.params.id);
 
     if (!user_role) return res.status(404).send('The user role with the given ID was not found.');

@@ -1,15 +1,40 @@
-
 const { Apartment, validate } = require('../models/apartment');
 const { Apartment_Building } = require('../models/apartmet_building');
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const auth = require('../middleware/auth');
+const admin_auth = require('../middleware/admin');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'upload/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, new Date().toDateString() + file.originalname)
+    }
+})
+var upload = multer({ storage: storage })
 
 /*
     Lấy ra toàn bộ apartment.
 */
 router.get('/', async (req, res) => {
     const apt = await Apartment.find().sort('name');
+    res.send(apt);
+});
+/*
+    Lấy ra toàn bộ nhà bán.
+*/
+router.get('/sell', async (req, res) => {
+    const apt = await Apartment.find({stype: '0'}).sort('name');
+    res.send(apt);
+});
+/*
+    Lấy ra toàn bộ nhà thuê.
+*/
+router.get('/rent', async (req, res) => {
+    const apt = await Apartment.find({stype: '1'}).sort('name');
     res.send(apt);
 });
 
@@ -26,7 +51,12 @@ router.get('/:id', async (req, res) => {
 /*
     Thêm mới apartment.
 */
-router.post('/', async (req, res) => {
+router.post('/', [auth, admin_auth], upload.array('apartment_images', 20), async (req, res) => {
+    if (!req.files) return res.status(404).send('Please upload a file.');
+    var arrayFile = [];
+    req.files.forEach((item, index) => {
+        arrayFile.push(item.path)
+    });
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     // Apartmet Building
@@ -60,9 +90,9 @@ router.post('/', async (req, res) => {
             ceo_building: apartmetBuilding.ceo_building,
             logo_img: apartmetBuilding.logo_img
         },
-        apartment_img: req.body.apartment_img
-    });
+        apartment_img: arrayFile
 
+    });
     apartment = await apartment.save();
     res.send(apartment);
 });
@@ -70,11 +100,16 @@ router.post('/', async (req, res) => {
 /*
     Sửa đổi thông tin Apartmet
 */
-router.put('/:id', async (req, res) => {
+router.put('/:id', [auth, admin_auth], upload.array('apartment_images', 20), async (req, res) => {
+    if (!req.files) return res.status(404).send('Please upload a file.');
+    var arrayFile = [];
+    req.files.forEach((item, index) => {
+        arrayFile.push(item.path)
+    });
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     // Apartmet Building
-    const apartmetBuilding = await Apartment_Building.findById(req.body.apartmetBuildingId);
+    const apartmetBuilding = await Apartment_Building.findById(req.body.apartmet_building_id);
     if (!apartmetBuilding) return res.status(400).send('Invalid apartmet building.');
 
     // Apartmet
@@ -104,8 +139,9 @@ router.put('/:id', async (req, res) => {
             ceo_building: apartmetBuilding.ceo_building,
             logo_img: apartmetBuilding.logo_img
         },
-        apartment_img: req.body.apartment_img
-    }, { new: true });
+        apartment_img: arrayFile,
+        update_at: Date.now()
+    }, { new: true, useFindAndModify: false });
 
     if (!apartment) return res.status(404).send('The apartment with the given ' + req.body.apt_name + ' was not found.');
     res.send(apartment);
@@ -114,7 +150,7 @@ router.put('/:id', async (req, res) => {
 /*
     Xóa toàn thông tin Apartmet theo ID
 */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, admin_auth], async (req, res) => {
     const apartment = await Apartment.findByIdAndRemove(req.params.id);
 
     if (!apartment) return res.status(404).send('The apartment with the given ID was not found.');

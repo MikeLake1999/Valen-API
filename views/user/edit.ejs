@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../head'); -%>
+</head>
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <%- include('../header'); -%>
+
+
+        <!--sidebar end-->
+        <!-- main content -->
+    </section>
+    <section id="main-content" class="">
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Cập nhật </h3>
+          <div class="mt">
+    
+            <!-- page start-->
+            <div class="col-lg-12">
+              <form method="post" action="/admin/user_service/update/<%= user._id%>">
+                <div class="form-group">
+                    <label>Tên người dùng:</label>
+                    <input type="text" name="user_name" class="form-control" value="<%= user.user_name%>">
+                  </div>
+                  <div class="form-group">
+                    <label>Tên đầy đủ:</label>
+                    <input class="form-control" name="full_name" value="<%= user.full_name%>" >
+                  </div>
+                  <!-- <div class="form-group">
+                    <label>Mô tả công ty:</label>
+                    <input class="form-control" name="desc">
+                  </div> -->
+                
+                 
+                    <div class="form-group">
+                      <label>Ngày sinh:</label>
+                      <input type="date" class="form-control" name="date_of_birth" value="<%= moment(user.date_of_birth).format('YYYY-MM-DD')%>">
+                    </div>
+                    <div class="form-group">
+                      <label>Giới tính:</label>
+                      <select  name="gender" class="form-control">
+                       
+                        <option value="F" <% if( user.gender === 'F'){%> selected <% } %>>Nữ</option>
+                        <option value="M" <% if( user.gender === 'M'){%> selected <% } %>>Nam</option>
+                        
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>SĐT:</label>
+                      <input class="form-control" name="phone_number" value="<%= user.phone_number%>">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label>Quyền hạn:</label>
+
+
+                      
+                      <select  name="user_role_id" class="form-control">
+                        <% for(var i = 0; i < role.length; i++) { %>
+                          
+                      <option <% if ( role[i].desc === user.user_role.desc) { %> selected<% } %> value="<%= role[i]._id%>" ><%= role[i].desc%></option>
+                     
+                      <%}%>
+                      </select>
+                      
+                      
+                      
+                    </div>
+                    
+                     
+                      
+      
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+              </form>
+            </div>
+    
+            <!-- page end-->
+          </div>
+          <!-- /row -->
+        </section>
+        <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+
+    <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" language="javascript" src="lib/advanced-datatable/js/jquery.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="lib/jquery.scrollTo.min.js"></script>
+  <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+    <!--common script for all pages-->
+    <script src="lib/common-scripts.js"></script>
+    <!--script for this page-->
+
+</body>
+
+</html> 

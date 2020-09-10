@@ -1,0 +1,80 @@
+[
+    {
+        "price_id": "01",
+        "minimum_prices": 0,
+        "maximum_prices": 500000000,
+        "desc": "< 500 triệu"
+    },
+    {
+        "price_id": "02",
+        "minimum_prices": 500000000,
+        "maximum_prices": 800000000,
+        "desc": "500 - 800 triệu"
+    },
+    {
+        "price_id": "03",
+        "minimum_prices": 800000000,
+        "maximum_prices": 1000000000,
+        "desc": "800 triệu - 1 tỷ"
+    },
+    {
+        "price_id": "04",
+        "minimum_prices": 1000000000,
+        "maximum_prices": 2000000000,
+        "desc": "1 - 2 tỷ"
+    },
+    {
+        "price_id": "05",
+        "minimum_prices": 2000000000,
+        "maximum_prices": 3000000000,
+        "desc": "2 - 3 tỷ"
+    },
+    {
+        "price_id": "06",
+        "minimum_prices": 3000000000,
+        "maximum_prices": 5000000000,
+        "desc": "3 - 5 tỷ"
+    },
+    {
+        "price_id": "07",
+        "minimum_prices": 5000000000,
+        "maximum_prices": 7000000000,
+        "desc": "5 - 7 tỷ"
+    },
+    {
+        "price_id": "08",
+        "minimum_prices": 7000000000,
+        "maximum_prices": 10000000000,
+        "desc": "7 - 10 tỷ"
+    },
+    {
+        "price_id": "09",
+        "minimum_prices": 10000000000,
+        "maximum_prices": 20000000000,
+        "desc": "10 - 20 tỷ"
+    },
+    {
+        "price_id": "10",
+        "minimum_prices": 20000000000,
+        "maximum_prices": 30000000000,
+        "desc": "20- 30 tỷ"
+    },
+    {
+        "price_id": "11",
+        "minimum_prices": 30000000000,
+        "maximum_prices": 50000000000,
+        "desc": "30 - 50 tỷ"
+    },
+    {
+        "price_id": "12",
+        "minimum_prices": 50000000000,
+        "maximum_prices": 100000000000,
+        "desc": "50 - 100 tỷ"
+    },
+    {
+        "price_id": "13",
+        "minimum_prices": 100000000000,
+        "maximum_prices": 1000000000000,
+        "desc": "> 100 tỷ"
+    }
+]

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const ApartmentImg = mongoose.model('Apartment_Img', new mongoose.Schema({
     apt_code: String,
-    img_desc: String,
     img_path: String
 }));
 

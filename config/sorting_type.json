@@ -1,0 +1,32 @@
+[
+    {
+        "title_soft": "title-asc",
+        "sort_value": "ASC",
+        "description": "A → Z"
+    },
+    {
+        "title_soft": "title-desc",
+        "sort_value": "DESC",
+        "description": "Z → A"
+    },
+    {
+        "title_soft": "price-asc",
+        "sort_value": "ASC",
+        "description": "Giá tăng dần"
+    },
+    {
+        "title_soft": "price-desc",
+        "sort_value": "DESC",
+        "description": "Giá giảm dần"
+    },
+    {
+        "title_soft": "datemodified-desc",
+        "sort_value": "DESC",
+        "description": "Mới nhất"
+    },
+    {
+        "title_soft": "datemodified-asc",
+        "sort_value": "ASC",
+        "description": "Cũ nhất"
+    }
+]

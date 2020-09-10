@@ -3,7 +3,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title=""></div>
     </div>
     <!--logo start-->
-    <a href="/building/building_service" class="logo"><b>VA<span>LEN</span></b></a>
+    <a href="/profile" class="logo"><b>VA<span>LEN</span></b></a>
     <!--logo end-->
     <div class="nav notify-row" id="top_menu">
 
@@ -23,36 +23,45 @@ MAIN SIDEBAR MENU
     <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered"><a><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-            <h5 class="centered"><p>Admin</p></h5>
-            <li class="mt">
-                <a href="/building/building_service">
+            <p class="centered"><a><img src="img/head.png"  width="150"></a></p>
+            <h5 class="centered"><p><%= username %></p></h5>
+           
+            <li class="mt" >
+                <a  <% if (page_name === 'homepage') { %>class="active" <% } %> href="/profile">
                     <i class="fa fa-dashboard"></i>
                     <span>Thống Kê</span>
                 </a>
             </li>
-
-            <li class="sub-menu">
-                <a <% if (page_name === 'building') { %>class="active" <% } %> href="javascript:;">
+            <li class="sub-menu" >
+                <a  <% if (page_name === 'booking') { %>class="active" <% } %> href="/admin/booking_service">
+                    <i class="fa fa-th"></i>
+                    <span>Danh sách Đơn Hàng</span>
+                </a>
+            </li>
+            
+            <li class="sub-menu" >
+                <a  <% if (page_name === 'user') { %>class="active" <% } %>  href="/admin/user_service">
+                    <i class="fa fa-th"></i>
+                    <span>Danh sách người dùng</span>
+                </a>
+            </li>
+            <li class="sub-menu" >
+                <a  <% if (page_name === 'role') { %>class="active" <% } %>  href="/admin/role_service">
+                    <i class="fa fa-th"></i>
+                    <span>Danh sách quyền</span>
+                </a>
+            </li>
+            <li class="sub-menu" >
+                <a  <% if (page_name === 'building') { %>class="active" <% } %> href="/admin/building_service">
                     <i class="fa fa-th"></i>
                     <span>Danh Sánh Người Bán</span>
                 </a>
-                <ul class="sub">
-                   
-                    <li <% if (page_name === 'building') { %>class="active" <% } %> ><a href="/building/building_service">Quản lý tòa nhà</a></li>
-    
-                </ul>
             </li>
-            <li class="sub-menu">
-                <a <% if (page_name === 'apartment') { %>class="active" <% } %> href="javascript:;">
+            <li class="sub-menu" >
+                <a  <% if (page_name === 'apartment') { %>class="active" <% } %> href="/admin/apartment_service">
                     <i class="fa fa-th"></i>
                     <span>Danh Sánh Căn Hộ</span>
                 </a>
-                <ul class="sub">
-                   
-                    <li <% if (page_name === 'apartment') { %>class="active" <% } %> ><a href="/building/apartment_service">Quản lý căn hộ</a></li>
-    
-                </ul>
             </li>
     </div>
 </aside>

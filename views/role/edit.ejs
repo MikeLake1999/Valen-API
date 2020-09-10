@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../head'); -%>
+</head>
+<style>
+  input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background: white;
+  color: black;
+}
+</style>
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <%- include('../header'); -%>
+
+
+        <!--sidebar end-->
+        <!-- main content -->
+    </section>
+    <section id="main-content" class="">
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Cập nhật </h3>
+          <div class="mt">
+    
+            <!-- page start-->
+            <div class="col-lg-12">
+              <form method="post" action="/admin/role_service/update/<%= role._id%>">
+                <input class="hidden" value="<%= role._id %>" name="id" >
+                <div class="form-group">
+                    <label>Mã Role:</label>
+                    <input type="text" name="role_code" class="form-control" value="<%= role.role_code %>">
+                  </div>
+                  <div class="form-group">
+                    <label>Tên Role:</label>
+                    <input class="form-control" name="desc" value="<%= role.desc %>">
+                  </div>
+                
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+              </form>
+            </div>
+    
+            <!-- page end-->
+          </div>
+          <!-- /row -->
+        </section>
+        <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+
+    <!--footer end-->
+    </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!--script for this page-->
+    <script>
+        $(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span class=\"remove\">Remove image</span>" +
+            "</span>").insertAfter("#files");
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+       
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
+      </script>
+
+</body>
+
+</html> 
